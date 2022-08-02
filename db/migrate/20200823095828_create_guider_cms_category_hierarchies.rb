@@ -1,8 +1,8 @@
 class CreateGuiderCmsCategoryHierarchies < ActiveRecord::Migration[6.0]
   def change
     create_table :guider_cms_category_hierarchies, id: false do |t|
-      t.integer :ancestor_id, null: false
-      t.integer :descendant_id, null: false
+      t.references :ancestor, index: true, foreign_key:{to_table: "guider_cms_categories"}, null: false, type: :uuid
+      t.references :descendant, index: true, foreign_key: {to_table: "guider_cms_categories"}, null: false, type: :uuid
       t.integer :generations, null: false
     end
 
